@@ -23,3 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+.backgroundPic {
+    background-image: url(Home.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

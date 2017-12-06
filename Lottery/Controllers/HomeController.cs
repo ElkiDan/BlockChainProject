@@ -26,5 +26,10 @@ namespace Lottery.Controllers
 
             return View();
         }
+
+        public ActionResult LotteryPage() {
+            ViewBag.Message = "HomePage";
+            return View();
+        }
     }
 }
