@@ -215,6 +215,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Home.jpg" />
+    <Content Include="Images\Block.gif" />
     <Content Include="Images\Lottery.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
