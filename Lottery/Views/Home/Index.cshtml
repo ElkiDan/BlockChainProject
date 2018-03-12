@@ -1,14 +1,33 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+<script type="text/javascript">
+    var myContractInstance;
+    if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+    } else {
+        var Web3 = require('web3');
+        var web3 = new Web3(new Web3.providers.HttpProvider('')); //http provider
+        var version = web3.version.api;
+        var contractABI = []; //the contract abi from remix
+        if (contractABI != '') {
+            var MyContract = web3.eth.contract(contractABI);
+            myContractInstance = MyContract.at("0x"); //the contract address
+        } else {
+            console.log("Error");
+        }
+    }
+</script>
+
 <div class="jumbotron">
     <div class="col-md-8">
         <h1 class="">Lottery</h1>
         <p class="">Our Lottery is Full Randomized Lottery!</p>
     </div>
 
-        <img src="~/Images/Block.gif" width="200px" height="150px"/>
-    
+    <img src="~/Images/Block.gif" width="200px" height="150px"/>
+
 </div>
 
 <div >
@@ -16,17 +35,14 @@
         <form id="play_form">
             <div class="row">
                 <div class="col-md-8">
-                    <h3 >Choose ticket value</h3>
-                    <span class="">
-                        Your ticket value can be any number
-                        <span class="">between 0.001 to 1 ETH</span>
-                    </span>
+
                     <div class="row">
                         <div class="col-md-5 col-sm-6 col-xs-12">
                             <div class="form-group">
+                                <h3>Insert Your commitment</h3>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" id="play_eth_amount" pattern="[0-9]+([\.,][0-9]{0,4}})?" min="0.001" step="0.001" max="1.0" value="0.01">
-                                    <div class="input-group-addon">ETH</div>
+                                    <input type="text" class="form-control" id="commitment">
+
                                 </div>
                             </div>
                         </div>
@@ -91,8 +107,17 @@
             <div>
                 <h3></h3>
             </div>
-            <button type="submit" class="btn btn-success col-lg-12" onclick="">Play Now>></button>
+            <button type="submit" class="btn btn-success col-lg-12" onclick="play()">Play Now>></button>
 
+            <script type="text/javascript">
+                function play() {
+                    if (myContractInstance.PlaceNumbersAndCommitment()) {
+
+                    } else {
+
+                    }
+                }
+            </script>
 
         </form>
     </div>
