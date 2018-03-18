@@ -3,21 +3,23 @@
 }
 
 <script type="text/javascript">
-    var myContractInstance;
-    if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider);
-    } else {
-        var Web3 = require('web3');
-        var web3 = new Web3(new Web3.providers.HttpProvider('')); //http provider
-        var version = web3.version.api;
-        var contractABI = []; //the contract abi from remix
-        if (contractABI != '') {
-            var MyContract = web3.eth.contract(contractABI);
-            myContractInstance = MyContract.at("0x"); //the contract address
+    $(document).ready(function() {
+        var myContractInstance;
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
         } else {
-            console.log("Error");
+            var Web3 = require('web3');
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); //http provider
+            var version = web3.version.api;
+            var contractABI = JSON.parse('[]'); //Put here the abi
+            if (contractABI != '') {
+                var MyContract = web3.eth.contract(contractABI);
+                myContractInstance = MyContract.at("0x"); //the contract address
+            } else {
+                console.log("Error");
+            }
         }
-    }
+    });
 </script>
 
 <div class="jumbotron">
@@ -95,9 +97,9 @@
                                             document.getElementById(runNumber).value =
                                                 Math.floor(Math.random() * 37) + 1;
                                         }
-
                                     }
                                 </script>
+
                             </div>
                         </div>
                     </div>
@@ -111,10 +113,30 @@
 
             <script type="text/javascript">
                 function play() {
-                    if (myContractInstance.PlaceNumbersAndCommitment()) {
+                    var address = web3.eth.accounts[0];
+                    var balance = web3.eth.getBalance(address);
+                    if (balance >= 0.01) {
+                        var array = new INT[6];
+                        array[0] = document.getElementById("number1").value;
+                        array[1] = document.getElementById("number2").value;
+                        array[2] = document.getElementById("number3").value;
+                        array[3] = document.getElementById("number4").value;
+                        array[4] = document.getElementById("number5").value;
+                        array[5] = document.getElementById("number6").value;
 
+                        //hash the commitment 
+
+                        var commitment = document.getElementById("commitment").toString();
+                        var hashOfCommitment = web3.sha3(commitment);
+
+                        if (myContractInstance.PlaceNumbersAndCommitment(array, hashOfCommitment, address)) {
+                            console.log("You are in the Game!");
+                            web3.eth.register(address);
+                        } else {
+                            console.log("You are not in the Game!");
+                        }
                     } else {
-
+                        console.log("You are out of money!");
                     }
                 }
             </script>
