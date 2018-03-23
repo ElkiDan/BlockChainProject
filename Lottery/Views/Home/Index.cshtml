@@ -37,41 +37,31 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Choose your lucky numbers from 1 to 37</h3>
+                    <h3>Choose your lucky numbers from 1 to 9</h3>
 
                     <div class="row">
                         <div class="">
                             <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number1" pattern="1?[0-9]" min="1" step="1" max="37" placeholder="First number"> <span class="hr"></span>
+                                <input type="number" class="form-control" id="number1" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="First number"> <span class="hr"></span>
                             </div>
                             <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number2" pattern="1?[0-9]" min="1" step="1" max="37" placeholder="Second number"><span class="hr"></span>
+                                <input type="number" class="form-control" id="number2" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="Second number"><span class="hr"></span>
                             </div>
                             <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number3" pattern="1?[0-9]" min="1" step="1" max="37" placeholder="Third number"> <span class="hr"></span>
+                                <input type="number" class="form-control" id="number3" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="Third number"> <span class="hr"></span>
                             </div>
                             <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number4" pattern="1?[0-9]" min="1" step="1" max="37" placeholder="Forth number"> <span class="hr"></span>
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number5" pattern="1?[0-9]" min="1" step="1" max="37" placeholder="Fifth number"> <span class="hr" style="display: none;"></span>
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number6" min="1" max="37" placeholder="Sixth number"> <span class="hr"></span>
-                            </div>
-
-                            <div class="container">
-
-                                <div>
-                                    <label>Just let the fate to decide & Generate random numbers</label>
-                                </div>
-                                <div>
-                                    <img type="button" onclick="setRandomNumbers()" style="width: 200px; height: 100px" src="../../Images/Lottery.jpg"></img>
-                                </div>
+                                <input type="number" class="form-control" id="number4" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="Forth number"> <span class="hr"></span>
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <img type="button" class="ballsPicStyle" onclick="setRandomNumbers()"  src="~/Images/Lottery.jpg"></img> 
 
+                    </div>
+                    <div style="padding-left: 40%">
+                        <img id="loading" style="visibility: hidden; width: 30%; height: 150px" src="~/Images/loading.gif" />
+                    </div>
                 </div>
             </div>
             <div>

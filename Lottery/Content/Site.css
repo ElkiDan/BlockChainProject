@@ -38,3 +38,9 @@ textarea {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.ballsPicStyle {
+    width: 20%;
+    height: 100px;
+    vertical-align: middle;
+}
