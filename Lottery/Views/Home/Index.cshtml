@@ -39,23 +39,6 @@
                 <div class="col-md-12">
                     <h3>Choose your lucky numbers from 1 to 9</h3>
 
-                    <div class="row">
-                        <div class="">
-                            <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number1" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="First number"> <span class="hr"></span>
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number2" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="Second number"><span class="hr"></span>
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number3" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="Third number"> <span class="hr"></span>
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="number" class="form-control" id="number4" pattern="1?[0-9]" min="1" step="1" max="9" placeholder="Forth number"> <span class="hr"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
                         <img type="button" class="ballsPicStyle" onclick="setRandomNumbers()"  src="~/Images/Lottery.jpg"></img> 
 
                     </div>
@@ -69,6 +52,8 @@
             </div>
             <button id="playBtn" type="button" class="btn btn-success col-lg-12" onclick="play()">Play Now>></button>
             <button id ="randomBtn" disabled="disabled" type="button" class="btn btn-success col-lg-12" onclick="sendRandom()">Send Your Random>></button>
-        </form>
+            <button id="checkIfLotteryCanStartBtn" disabled="disabled" type="button" class="btn btn-success col-lg-12" onclick="checkIfLotteryCanStart()">Check If Lottery Can Start>></button>
+       
+    </form>
     </div>
 </div>
