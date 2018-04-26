@@ -44,3 +44,22 @@ textarea {
     height: 100px;
     vertical-align: middle;
 }
+
+.space {
+    margin-left: 5%;
+}
+
+.inputRandom {
+    margin-left: 5%;
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+  
+}

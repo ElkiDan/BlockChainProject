@@ -14,52 +14,42 @@
 
 </div>
 
-<div >
-    <div >
-        <form id="play_form">
-            <div class="row">
-                <div class="col-md-8">
-
-                    <div class="row">
-                        <div class="col-md-5 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <h3>Insert Your commitment</h3>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="commitment">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+<div>
+    <div>
+        <div class="row">
+            <div class="col-md-3">
+                <h3> </h3>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Choose your lucky numbers from 1 to 9</h3>
-
-                        <img type="button" class="ballsPicStyle" onclick="setRandomNumbers()"  src="~/Images/Lottery.jpg"></img> 
-
-                    </div>
-                    <div style="padding-left: 40%">
-                        <img id="loading" style="visibility: hidden; width: 30%; height: 150px" src="~/Images/loading.gif" />
-                    </div>
-                </div>
+            <div class="col-md-3">
+                <h3>Insert Your Random</h3>
             </div>
-            <div>
-                <h3></h3>
+            <div class="col-md-3">
+                <h3><input type="number" min="1" max="20" class="inputRandom" id="randomNumber"></h3>
+                
             </div>
-            <button id="playBtn" type="button" class="btn btn-success col-lg-12" onclick="play()">Play Now>></button>
-            <button id ="randomBtn" disabled="disabled" type="button" class="btn btn-success col-lg-12" onclick="sendRandom()">Send Your Random>></button>
-<<<<<<< HEAD
-            <button id="checkIfLotteryCanStartBtn" disabled="disabled" type="button" class="btn btn-success col-lg-12" onclick="checkIfLotteryCanStart()">Check If Lottery Can Start>></button>
-       
-    </form>
-=======
-            <button id="checkForStartBtn" disabled="disabled" type="button" class="btn btn-success col-lg-12" onclick="checkIfLotteryCanStart()">Check If Lottery Can Start>></button>
+            <div class="col-md-3">
+                <h3> </h3>
+            </div>
 
-        </form>
->>>>>>> refs/remotes/origin/master
+        </div>
+        <div>
+            <h3></h3>
+        </div>
+        <div class="form-group row">
+            <div class="space">
+                <button id="playBtn" type="button" class="btn btn-success col-md-3" onclick="play()">Play Now >></button>
+            </div>
+            <div class="col-md-1"></div>
+            <div >
+                <button id="randomBtn" disabled="disabled" type="button" class="btn btn-success col-md-3" onclick="sendRandom()">Send Your Random >></button>
+            </div>
+            <div class="col-md-1"></div>
+            <div >
+                <button id="checkForStartBtn" disabled="disabled" type="button" class="btn btn-success col-md-3 " onclick="checkIfLotteryCanStart()">Check If Lottery Can Start >></button>
+            </div>
+        </div>
+        <div class="space">
+            <img id="loading" style="visibility: hidden; width: 200px; height: 150px" src="~/Images/loading.gif" />
+        </div>
     </div>
 </div>

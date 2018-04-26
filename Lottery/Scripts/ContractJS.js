@@ -2,7 +2,8 @@
 var myContractInstance;
 var web3;
 var numberOfParticipents = 2;
-var commitment;
+var randomNumber;
+var address;
 
 if (typeof web3 !== 'undefined') {
     web3 = new Web3(web3.currentProvider);
@@ -18,10 +19,9 @@ var contractAddress = "fill address";
 myContractInstance = myContract.at(contractAddress); //the contract address
 
 
-
 function play() {
     document.getElementById("playBtn").disabled = true;
-    var address = web3.eth.accounts[0];
+    address = web3.eth.accounts[0];
     //check if its an address.
     var isAddress = web3.isAddress(address);
     if (isAddress) {
@@ -37,64 +37,40 @@ function play() {
                     });
             });
         }
+
         getBalance(address).then((result) => {
             var balance = result.c[0] / 10000;
             alert("you got " + balance + " ether");
             if (balance >= amountOfPayment) {
-                //hash the commitment 
-                commitment = document.getElementById("commitment").value;
-                var hashOfCommitment = web3.sha3(commitment);
-<<<<<<< HEAD
-                var send = web3.eth.sendTransaction({ from: myAddress, to: myContractInstance, value: web3.toWei(0.01, "ether") });
-                myContractInstance.addNewPlayer(hashOfCommitment, 10000000000000000, function (error, result) {
-                                if (!(error)) {
-                                    console.log(result);
-                                    document.getElementById("loading").style.visibility = 'visible';
-                                    console.log("You are in the game!");
-=======
-                var conAbi = JSON.parse('[\r\n\t{\r\n\t\t"constant": false,\r\n\t\t"inputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "firstArray",\r\n\t\t\t\t"type": "uint256[]"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t"name": "secondArray",\r\n\t\t\t\t"type": "uint256[]"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"name": "CompareArrays",\r\n\t\t"outputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "",\r\n\t\t\t\t"type": "bool"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "nonpayable",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": false,\r\n\t\t"inputs": [],\r\n\t\t"name": "Announce",\r\n\t\t"outputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "",\r\n\t\t\t\t"type": "string"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "nonpayable",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": false,\r\n\t\t"inputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "add",\r\n\t\t\t\t"type": "address"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t"name": "numbers",\r\n\t\t\t\t"type": "uint256[]"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t"name": "hashedRandom",\r\n\t\t\t\t"type": "bytes32"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t"name": "amountOfEther",\r\n\t\t\t\t"type": "uint256"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"name": "PlaceNumbersAndCommitment",\r\n\t\t"outputs": [],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "nonpayable",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": true,\r\n\t\t"inputs": [],\r\n\t\t"name": "GetAvailablePlayersAmount",\r\n\t\t"outputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "",\r\n\t\t\t\t"type": "uint256"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "view",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": true,\r\n\t\t"inputs": [],\r\n\t\t"name": "owner",\r\n\t\t"outputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "",\r\n\t\t\t\t"type": "address"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "view",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": false,\r\n\t\t"inputs": [],\r\n\t\t"name": "GenerateRandomNumbers",\r\n\t\t"outputs": [],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "nonpayable",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": false,\r\n\t\t"inputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "add",\r\n\t\t\t\t"type": "address"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t"name": "random",\r\n\t\t\t\t"type": "string"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"name": "CheckCommitment",\r\n\t\t"outputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "",\r\n\t\t\t\t"type": "bool"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "nonpayable",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": false,\r\n\t\t"inputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "add",\r\n\t\t\t\t"type": "address"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"name": "AddVerifyPlayer",\r\n\t\t"outputs": [],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "nonpayable",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"constant": false,\r\n\t\t"inputs": [],\r\n\t\t"name": "GiveMeMyMoney",\r\n\t\t"outputs": [\r\n\t\t\t{\r\n\t\t\t\t"name": "success",\r\n\t\t\t\t"type": "bool"\r\n\t\t\t}\r\n\t\t],\r\n\t\t"payable": true,\r\n\t\t"stateMutability": "payable",\r\n\t\t"type": "function"\r\n\t},\r\n\t{\r\n\t\t"inputs": [],\r\n\t\t"payable": false,\r\n\t\t"stateMutability": "nonpayable",\r\n\t\t"type": "constructor"\r\n\t}\r\n]');
-                var myContract = web3.eth.contract(conAbi);
-                myContractInstance = myContract.at("0xd4a775b125cfb12360edc08b2457e6ffd9419d67"); //the contract address
-                myContractInstance.getAvailablePlayersAmount.call(function (err, result) {
-                    if (result.c[0] > 0) {
-                        myContractInstance.addNewPlayer(hashOfCommitment, amountOfPayment,
-                            function(error, result) {
-                                if (!error) {
-                                    //console.log(result);
-                                    $("#loading").show();
-                                    console.log("You are in the game!");
-                                    var sentRandomEvent = myContractInstance.AnnonceSentRandom();
-
-                                    sentRandomEvent.watch(function (error, result) {
-                                        if (!error) {
-                                            document.getElementById("randomBtn").disabled = false;
-                                            document.getElementById("checkForStartBtn").disabled = false;
-                                            console.log("OK, Now you have 30 min to sent your randomness! and you can check if lottery can start and have a BONUS!");
-                                        } else {
-                                            $("#loader").hide();
-                                            console.log(error);
-                                        }
-                                    });
-
-                                    
->>>>>>> refs/remotes/origin/master
-                                }
-                            });
-                    }
+                //hash the random number 
+                randomNumber = document.getElementById("randomNumber").value;
+                var hashOfRandom = web3.sha3(randomNumber);
+                var send = web3.eth.sendTransaction({
+                    from: address,
+                    to: contractAddress,
+                    value: web3.toWei(0.01, "ether")
                 });
-<<<<<<< HEAD
-                
-=======
-                    
->>>>>>> refs/remotes/origin/master
+                myContractInstance.addNewPlayer(hashOfRandom,
+                    10000000000000000,
+                    function(error, result) {
+                        if (!(error)) {
+                            //console.log(result);
+                            document.getElementById("loading").style.visibility = 'visible';
+                            console.log("You are in the game!");
+                        }
+                    });
             } else {
                 console.log("You are out of money!");
             }
+        });
+    } else {
+        console.log("This is not an address!");
     }
+}
 
 var AnnonceSentRandom = myContractInstance.AnnonceSentRandom();
 
-AnnonceSentRandom.watch(function (error, result) {
+AnnonceSentRandom.watch(function(error, result) {
     if (!error) {
         $("#loader").hide();
         document.getElementById("randomBtn").disabled = false;
@@ -109,41 +85,25 @@ AnnonceSentRandom.watch(function (error, result) {
 
 function sendRandom() {
     document.getElementById("randomBtn").disabled = true;
-    
-    var random = commitment;
-<<<<<<< HEAD
-    myContractInstance.submitRandomness(address, random, function (error, result) {
-        if (!error) {
-            console.log("OK, now wait please for the announce!");
-        } else {
-            console.log("You are out of the Game!");
-        } 
-     });
-}
-
-function checkIfLotteryCanStart() {
-    myContractInstance.checkIfLotteryCanStart(function (error, result) {
-    });
-=======
-    myContractInstance.checkRandomness.call(random,
-        function (error, result) {
-            if (result) {
-                myContractInstance.submitRandomness(random, function (err, res) { });
+    var random = randomNumber;
+    myContractInstance.submitRandomness(address,
+        random,
+        function(error, result) {
+            if (!error) {
                 console.log("OK, now wait please for the announce!");
             } else {
-                console.log("This is not your random, you are out of the game!");
+                console.log("You are out of the Game!");
             }
         });
 }
 
 function checkIfLotteryCanStart() {
     myContractInstance.checkIfLotteryCanStart(
-        function (error, result) {
+        function(error, result) {
             if (!error) {
                 console.log("Trying");
             } else {
                 console.log("failed!");
             }
         });
->>>>>>> refs/remotes/origin/master
 }
