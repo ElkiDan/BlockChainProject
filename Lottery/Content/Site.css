@@ -63,3 +63,11 @@ textarea {
     border-radius: 4px;
   
 }
+
+.backgroundPlay {
+    background-image: url(ethereum.png);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

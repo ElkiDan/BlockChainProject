@@ -2,54 +2,167 @@
     ViewBag.Title = "Home Page";
 }
 
+<head>
+    <title>CryptoLottery</title>
+</head>
+<style>
+    body {
+        font-family: Gisha;
+        margin: 0;
+    }
+
+    * { box-sizing: border-box; }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5vmin;
+        margin-bottom: 3vh;
+    }
+
+    .imageHolder {
+        width: 30vw;
+        height: 18vh;
+        overflow: hidden;
+        margin-top: 1vh;
+    }
+
+    .imageHolder > img { height: 100%; }
+
+    input[type="number"] {
+        height: 30%;
+        width: 100%;
+        border: none;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+        padding: 2vmin;
+        border-radius: 3px;
+        outline: none;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .columnFlex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .margin-bottom5vh { margin-bottom: 5vh; }
+
+    .button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color:darkslateblue ;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 28px;
+        padding: 20px;
+        height: 30%;
+        width: 100%;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 7px;
+        box-shadow: 0 9px #999;
+    }
+
+    .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    .button:hover span { padding-right: 25px; }
+
+    .button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+
+    .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+    .disabled {
+        opacity: 0.6;
+    }
+    .etherBalnaceLabel {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .etherBalnace {
+        background: cadetblue;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 18px;
+        border-radius: 10px;
+    }
+
+    .hvr-grow {
+        background: cadetblue;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 18px;
+        border-radius: 10px;
+
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+    }
+    .hvr-grow:hover, .hvr-grow:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+</style>
+<body class="backgroundPlay">
+<div class="header">
+    <div class="imageHolder">
+        <img id="loginImg" src="~/Images/login.png" style="visibility: hidden"/>
+        <img id="logoutImg" src="~/Images/logout.png" style="visibility: hidden" />
+    </div>
+    <div class="columnFlex">
+        <label class="etherBalnaceLabel">Current Ether Balance</label>
+        <input class="hvr-grow" id ="currentBalance" type="button" value="Submit">
+    </div>
+</div>
+<div class="columnFlex">
+    <div class="columnFlex margin-bottom5vh">
+        <h1 style="color:#666666; font-weight: bold">Enter Your Random</h1>
+        <input type="number" placeholder="Enter Random"/>
+    </div>
+    <div class="columnFlex">
+        <button id="playBtn" class="button" onclick="play()" style="vertical-align: middle">
+            <span>Play Now </span>
+        </button>
+        <button id="randomBtn" disabled="disabled" onclick="sendRandom()" class="button disabled" style="vertical-align: middle">
+            <span>Send Your Random </span>
+        </button>
+        <button id="checkForStartBtn" disabled="disabled" onclick="checkIfLotteryCanStart()" class="button disabled" style="vertical-align: middle">
+            <span>Check If Lottery Can Start </span>
+        </button>
+    </div>
+</div>
+</body>
 <script src="~/Scripts/ContractJS.js"></script>
-
-<div class="jumbotron">
-    <div class="col-md-8">
-        <h1 class="">Lottery</h1>
-        <p class="">Our Lottery is Full Randomized Lottery!</p>
-    </div>
-
-    <img src="~/Images/Block.gif" width="200px" height="150px"/>
-
-</div>
-
-<div>
-    <div>
-        <div class="row">
-            <div class="col-md-3">
-                <h3> </h3>
-            </div>
-            <div class="col-md-3">
-                <h3>Insert Your Random</h3>
-            </div>
-            <div class="col-md-3">
-                <h3><input type="number" min="1" max="20" class="inputRandom" id="randomNumber"></h3>
-                
-            </div>
-            <div class="col-md-3">
-                <h3> </h3>
-            </div>
-
-        </div>
-        <div>
-            <h3></h3>
-        </div>
-        <div class="form-group row">
-            <div class="space">
-                <button id="playBtn" type="button" class="btn btn-success col-md-3" onclick="play()">Play Now >></button>
-            </div>
-            <div class="col-md-1"></div>
-            <div >
-                <button id="randomBtn" disabled="disabled" type="button" class="btn btn-success col-md-3" onclick="sendRandom()">Send Your Random >></button>
-            </div>
-            <div class="col-md-1"></div>
-            <div >
-                <button id="checkForStartBtn" disabled="disabled" type="button" class="btn btn-success col-md-3 " onclick="checkIfLotteryCanStart()">Check If Lottery Can Start >></button>
-            </div>
-        </div>
-        <div class="space">
-            <img id="loading" style="visibility: hidden; width: 200px; height: 150px" src="~/Images/loading.gif" />
-        </div>
-    </div>
-</div>

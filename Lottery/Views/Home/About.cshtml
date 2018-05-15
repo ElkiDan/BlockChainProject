@@ -1,7 +1,24 @@
 ﻿@{
     ViewBag.Title = "About";
 }
+
+<style>
+    .imageHolder { 
+        height: 20vh;
+        overflow: hidden;
+        margin-top: 10vh;
+    }
+
+    .imageHolder>img {
+        height: 100%;
+    }
+</style>
 <h2 style="color: azure">@ViewBag.Title</h2>
 
-<body class="aboutBackgroundPic">
-    </body>
+<body >
+<div class="imageHolder" >
+    <img id="loginImg" src="~/Images/login.png" style="visibility: hidden"/>
+    <img id="logoutImg" src="~/Images/logout.png" style="visibility: hidden" />
+</div>
+</body>
+<script src="~/Scripts/testWatch.js"></script>

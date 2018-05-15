@@ -1,12 +1,33 @@
-﻿$(document).ready(function() {
-    if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider);
-    } else {
-        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-    }
+﻿
+if (typeof web3 !== 'undefined') {
+    web3 = new Web3(web3.currentProvider);
+} else {
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
+//var account = 0;
+var account = web3.eth.accounts[0];
+if (account == null) {
+    console.log("Not Connected");
+    document.getElementById("logoutImg").style.visibility = "visible";
+}
+var accountInterval = setInterval(function() {
+        if (web3.eth.accounts[0] !== account) {
 
-    web3.eth.defaultAccount = web3.eth.accounts[0];
-
+            account = web3.eth.accounts[0];
+            if (account != null) {
+                console.log("Connected");
+                document.getElementById("logoutImg").style.visibility = "hidden";
+                document.getElementById("loginImg").style.visibility = "visible";
+            } else {
+                console.log("Log Out");
+                document.getElementById("logoutImg").style.visibility = "visible";
+                document.getElementById("loginImg").style.visibility = "hidden";
+            }
+        }
+    },
+    100);
+//web3.eth.defaultAccount = web3.eth.accounts[0];
+/*
     var CoursetroContract = web3.eth.contract([
         {
             "constant": false,
@@ -86,3 +107,4 @@
             });
     });
 });
+*/

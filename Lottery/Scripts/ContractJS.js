@@ -13,6 +13,55 @@ if (typeof web3 !== 'undefined') {
     var version = web3.version.api;
 }
 
+function getBalance(address) {
+    return new Promise(function (resolve, reject) {
+        web3.eth.getBalance(address,
+            function (error, result) {
+                if (error) {
+                    console.log("Error!");
+                } else {
+                    resolve(result);
+                }
+            });
+    });
+}
+
+var account = web3.eth.accounts[0];
+if (account == null) {
+    console.log("Not Connected");
+    document.getElementById("logoutImg").style.visibility = "visible";
+    document.getElementById("currentBalance").value = "You Are Not Connected";
+} else {
+    console.log("Connected");
+    document.getElementById("loginImg").style.visibility = "visible";
+    getBalance(account).then((result) => {
+        var balance = result.c[0] / 10000;
+        document.getElementById("currentBalance").value = balance.toString() + " ETHER";
+    });
+
+}
+var accountInterval = setInterval(function () {
+        if (web3.eth.accounts[0] !== account) {
+
+            account = web3.eth.accounts[0];
+            if (account != null) {
+                console.log("Connected");
+                document.getElementById("logoutImg").style.visibility = "hidden";
+                document.getElementById("loginImg").style.visibility = "visible";
+                getBalance(account).then((result) => {
+                    var balance = result.c[0] / 10000;
+                    document.getElementById("currentBalance").value = balance.toString() + " ETHER";
+                });
+            } else {
+                console.log("Log Out");
+                document.getElementById("logoutImg").style.visibility = "visible";
+                document.getElementById("loginImg").style.visibility = "hidden";
+                document.getElementById("currentBalance").value = "You Are Not Connected";
+            }
+        }
+    },
+    100);
+
 var conAbi = JSON.parse('Fill ABI');
 var myContract = web3.eth.contract(conAbi);
 var contractAddress = "fill address";
@@ -21,22 +70,13 @@ myContractInstance = myContract.at(contractAddress); //the contract address
 
 function play() {
     document.getElementById("playBtn").disabled = true;
+    document.getElementById("playBtn").style.opacity = "0.6";
+
     address = web3.eth.accounts[0];
     //check if its an address.
     var isAddress = web3.isAddress(address);
     if (isAddress) {
-        function getBalance(address) {
-            return new Promise(function(resolve, reject) {
-                web3.eth.getBalance(address,
-                    function(error, result) {
-                        if (error) {
-                            console.log("Error!");
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-        }
+        
 
         getBalance(address).then((result) => {
             var balance = result.c[0] / 10000;
@@ -72,19 +112,23 @@ var AnnonceSentRandom = myContractInstance.AnnonceSentRandom();
 
 AnnonceSentRandom.watch(function(error, result) {
     if (!error) {
-        $("#loader").hide();
+        $("#loading").hide();
         document.getElementById("randomBtn").disabled = false;
+        document.getElementById("randomBtn").style.opacity = "1";
         //TODO After few min??
         document.getElementById("checkIfLotteryCanStart").disabled = false;
+        document.getElementById("checkIfLotteryCanStart").style.opacity = "1";
         console.log("Now you can send your random!");
     } else {
-        $("#loader").hide();
+        $("#loading").hide();
         console.log(error);
     }
 });
 
 function sendRandom() {
     document.getElementById("randomBtn").disabled = true;
+    document.getElementById("checkIfLotteryCanStart").style.opacity = "0.6";
+
     var random = randomNumber;
     myContractInstance.submitRandomness(address,
         random,
